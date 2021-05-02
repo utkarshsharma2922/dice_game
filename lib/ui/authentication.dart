@@ -1,7 +1,9 @@
 import 'package:dice_game/services/authenticator_service.dart';
+import 'package:dice_game/ui/home_page.dart';
 import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
 import 'package:dice_game/util/validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class AuthenticationScreen extends StatefulWidget {
   @override
@@ -84,16 +86,28 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     );
   }
 
-  _login(){
+  _login() async{
     if (_formKey.currentState.validate()){
-      AuthenticatorService().signInWith(email: _emailController.text, password: _passwordController.text);
+      Loader.showLoader(context);
+      AuthResult result = await AuthenticatorService().signInWith(email: _emailController.text, password: _passwordController.text);
+      Loader.hideLoader();
+      _handleAuthResult(result: result);
     }
   }
-  _signup(){
+  _signup() async{
     if (_formKey.currentState.validate()){
-      AuthenticatorService().signUpWith(email: _emailController.text, password: _passwordController.text);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Testing")));
+      Loader.showLoader(context);
+      AuthResult result = await AuthenticatorService().signUpWith(email: _emailController.text, password: _passwordController.text);
+      Loader.hideLoader();
+      _handleAuthResult(result: result);
+    }
+  }
 
+  _handleAuthResult({AuthResult result}){
+    if (result.success){
+      Navigator.push(context, CupertinoPageRoute(builder: (_) => HomePage()));
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.error)));
     }
   }
 }

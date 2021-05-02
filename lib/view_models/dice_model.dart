@@ -8,8 +8,8 @@ class DiceModel extends ChangeNotifier {
   }
 
   DiceModel._internal();
-  int _value;
-  int get diceValue =>  _value + 1;
+  int _value = 0;
+  int get diceValue =>  _value;
 
   updateDiceValue({int value}){
     _value = value;

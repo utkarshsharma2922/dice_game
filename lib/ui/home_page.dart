@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                   height: 25,
                 ),
                 Consumer<DiceModel>(builder: (context,data,_){
-                  return data.diceValue != null ? Text("You got ${data.diceValue}"):Container();
+                  return data.diceValue != 0 ? Text("You got   ${data.diceValue}"):Container();
                 }),
                 SizedBox(
                   height: 25,
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
     Components.showMessage("Are you sure you want to logout ?", context, "Logout", () async {
       Loader.showLoader(context);
       await FirebaseAuth.instance.signOut();
-      Provider.of<AuthenticatorService>(context).user = null;
+      Provider.of<AuthenticatorService>(context,listen: false).user = null;
       Loader.hideLoader();
       Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => AuthenticationScreen()));
     });

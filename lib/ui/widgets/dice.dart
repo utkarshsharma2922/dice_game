@@ -85,7 +85,7 @@ class DiceState extends State<Dice> {
         timer.cancel();
         _currentRollCount = 0;
         if (widget.isMock == false){
-          Provider.of<DiceModel>(context,listen: false).updateDiceValue(value: _diceNumber);
+          Provider.of<DiceModel>(context,listen: false).updateDiceValue(value: _diceNumber + 1);
         }
       }else{
         if (this.mounted){
