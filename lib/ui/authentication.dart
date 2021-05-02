@@ -1,4 +1,5 @@
 import 'package:dice_game/services/authenticator_service.dart';
+import 'package:dice_game/shared_ui/loader.dart';
 import 'package:dice_game/util/validator.dart';
 import 'package:flutter/material.dart';
 class AuthenticationScreen extends StatefulWidget {

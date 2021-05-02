@@ -1,4 +1,5 @@
 import 'package:dice_game/ui/authentication.dart';
+import 'package:dice_game/util/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +10,13 @@ void main() async{
 }
 
 class DiceApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: THEME_COLOR,
       ),
       home: AuthenticationScreen(),
     );
