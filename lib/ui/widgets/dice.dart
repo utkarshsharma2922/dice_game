@@ -5,11 +5,15 @@ import 'package:dice_game/util/constants.dart';
 import 'package:flutter/material.dart';
 
 class Dice extends StatefulWidget {
+
+  final Key key;
+  const Dice({this.key});
+
   @override
-  _DiceState createState() => _DiceState();
+  DiceState createState() => DiceState();
 }
 
-class _DiceState extends State<Dice> {
+class DiceState extends State<Dice> {
 
   final int numberOfRolls = 3;
   final List<String>numberPatterns = [
@@ -27,7 +31,6 @@ class _DiceState extends State<Dice> {
   @override
   void initState() {
     super.initState();
-    _roll();
   }
 
 
@@ -61,10 +64,11 @@ class _DiceState extends State<Dice> {
     );
   }
 
-  _roll(){
+  roll(){
     Timer.periodic(Duration(seconds: 1), (timer) {
       if (_currentRollCount > numberOfRolls) {
         timer.cancel();
+        _currentRollCount = 0;
       }else{
         setState(() {
           _diceNumber = Random().nextInt(5);

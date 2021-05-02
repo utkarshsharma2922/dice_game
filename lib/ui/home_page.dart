@@ -2,7 +2,6 @@ import 'package:dice_game/ui/authentication.dart';
 import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
 import 'package:dice_game/util/components.dart';
-import 'package:dice_game/util/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  GlobalKey<DiceState> diceKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,6 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white
             ),),
             onPressed: (){
-
             },
           ),
         ],
@@ -47,13 +47,34 @@ class _HomePageState extends State<HomePage> {
                 height: 30,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Tries: 10"),
-                  Text("Your Score :  80")
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Text("Tries: 10"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Text("Your Score :  80"),
+                  )
                 ],
               ),
-              Dice()
+              SizedBox(
+                height: 35,
+              ),
+              Dice(key: diceKey,),
+              SizedBox(
+                height: 35,
+              ),
+
+              ElevatedButton(
+                child: Text("Roll the dice",style: TextStyle(
+                    color: Colors.white
+                ),),
+                onPressed: (){
+                  diceKey.currentState.roll();
+                },
+              ),
             ],
           ),
         ),
