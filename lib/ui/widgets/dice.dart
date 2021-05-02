@@ -4,12 +4,14 @@ import 'dart:math';
 import 'package:dice_game/util/constants.dart';
 import 'package:dice_game/view_models/dice_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class Dice extends StatefulWidget {
 
   final Key key;
-  const Dice({this.key});
+  final bool isMock;
+  const Dice({this.key,this.isMock = false});
 
   @override
   DiceState createState() => DiceState();
@@ -29,12 +31,23 @@ class DiceState extends State<Dice> {
 
   int _currentRollCount = 0;
   int _diceNumber = 0;
+  Timer _timer;
 
   @override
   void initState() {
+    if (widget.isMock){
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        roll();
+      });
+    }
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +80,20 @@ class DiceState extends State<Dice> {
   }
 
   roll(){
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_currentRollCount > numberOfRolls) {
         timer.cancel();
         _currentRollCount = 0;
-        Provider.of<DiceModel>(context,listen: false).updateDiceValue(value: _diceNumber);
+        if (widget.isMock == false){
+          Provider.of<DiceModel>(context,listen: false).updateDiceValue(value: _diceNumber);
+        }
       }else{
-        setState(() {
-          _diceNumber = Random().nextInt(5);
-          _currentRollCount ++;
-        });
+        if (this.mounted){
+          setState(() {
+            _diceNumber = Random().nextInt(5);
+            _currentRollCount ++;
+          });
+        }
       }
     });
   }

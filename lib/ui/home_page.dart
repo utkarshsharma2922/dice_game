@@ -1,3 +1,4 @@
+import 'package:dice_game/services/authenticator_service.dart';
 import 'package:dice_game/ui/authentication.dart';
 import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
@@ -96,6 +97,7 @@ class _HomePageState extends State<HomePage> {
     Components.showMessage("Are you sure you want to logout ?", context, "Logout", () async {
       Loader.showLoader(context);
       await FirebaseAuth.instance.signOut();
+      Provider.of<AuthenticatorService>(context).user = null;
       Loader.hideLoader();
       Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => AuthenticationScreen()));
     });

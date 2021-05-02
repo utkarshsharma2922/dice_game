@@ -1,6 +1,12 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-class AuthenticatorService{
+class AuthenticatorService extends ChangeNotifier{
+  User user;
+  AuthenticatorService() {
+    user = FirebaseAuth.instance.currentUser;
+  }
 
   Future<bool>signInWith({@required String email,@required String password})async{
     try {

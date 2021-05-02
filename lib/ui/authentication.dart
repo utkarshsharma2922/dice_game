@@ -28,7 +28,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Dice(),
+            Dice(isMock: true,),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: TextFormField(
