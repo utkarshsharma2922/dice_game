@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "619509342686",
+    "project_id": "dice-game-ea4be",
+    "storage_bucket": "dice-game-ea4be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619509342686:android:80ba8376fe80f95de37d4f",
+        "android_client_info": {
+          "package_name": "com.example.dice_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619509342686-dv9sn1f1ese29q4mlu7fqd2rj5jgd92k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV63SNR6ol_AWkdBGMbnzl4TM-HVLOpGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619509342686-dv9sn1f1ese29q4mlu7fqd2rj5jgd92k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
