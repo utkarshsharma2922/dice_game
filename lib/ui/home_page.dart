@@ -1,5 +1,10 @@
+import 'package:dice_game/ui/authentication.dart';
+import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
+import 'package:dice_game/util/components.dart';
 import 'package:dice_game/util/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
   @override
@@ -12,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         leading:  IconButton(icon: Icon(Icons.logout,color: Colors.white,), onPressed: (){
-
+          _onPressedLogout();
         }),
         actions: [
           TextButton(
@@ -54,5 +59,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  _onPressedLogout(){
+    Components.showMessage("Are you sure you want to logout ?", context, "Logout", () async {
+      Loader.showLoader(context);
+      await FirebaseAuth.instance.signOut();
+      Loader.hideLoader();
+      Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => AuthenticationScreen()));
+    });
   }
 }
