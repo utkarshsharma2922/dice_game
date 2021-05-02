@@ -1,5 +1,6 @@
 import 'package:dice_game/services/authenticator_service.dart';
 import 'package:dice_game/ui/shared_ui/loader.dart';
+import 'package:dice_game/ui/widgets/dice.dart';
 import 'package:dice_game/util/validator.dart';
 import 'package:flutter/material.dart';
 class AuthenticationScreen extends StatefulWidget {
@@ -17,7 +18,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Login/Signup")),
+        title: Center(child: Text("Dice game",style: TextStyle(
+          color: Colors.white
+        ),)),
       ),
       body: Form(
         key: _formKey,
@@ -25,6 +28,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Dice(),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: TextFormField(
@@ -53,7 +57,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    child: Text("Login"),
+                    child: Text("Login",style: TextStyle(
+                      color: Colors.white
+                    ),),
                     onPressed: (){
                       _login();
                     },
@@ -62,7 +68,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    child: Text("Signup"),
+                    child: Text("Signup",style: TextStyle(
+                      color: Colors.white
+                    ),),
                     onPressed: (){
                       _signup();
                     },
