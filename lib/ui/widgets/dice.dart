@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:dice_game/util/constants.dart';
+import 'package:dice_game/view_models/dice_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Dice extends StatefulWidget {
 
@@ -69,6 +71,7 @@ class DiceState extends State<Dice> {
       if (_currentRollCount > numberOfRolls) {
         timer.cancel();
         _currentRollCount = 0;
+        Provider.of<DiceModel>(context,listen: false).updateDiceValue(value: _diceNumber);
       }else{
         setState(() {
           _diceNumber = Random().nextInt(5);
