@@ -4,6 +4,7 @@ import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/custom_textfield.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
 import 'package:dice_game/util/components.dart';
+import 'package:dice_game/util/constants.dart';
 import 'package:dice_game/util/validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,32 +62,47 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                     hint: "Password",
                   )
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      child: Text("Login",style: TextStyle(
-                        color: Colors.white
-                      ),),
-                      onPressed: (){
-                        _login();
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      child: Text("Signup",style: TextStyle(
-                        color: Colors.white
-                      ),),
-                      onPressed: (){
-                        _signup();
-                      },
-                    ),
-                  )
-                ],
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: 45,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(25.0),
+                  ),),
+                  child: Text("Login",style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0
+                  ),),
+                  onPressed: (){
+                    _login();
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text("OR",style: TextStyle(
+                  color: THEME_COLOR,
+                  fontSize: 16.0
+                ),),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: 45,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(25.0),
+                  ),),
+                  child: Text("Signup",style: TextStyle(
+                      color: Colors.white,
+                    fontSize: 16.0
+                  ),),
+                  onPressed: (){
+                    _signup();
+                  },
+                ),
               )
             ],
           ),
