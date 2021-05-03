@@ -2,6 +2,7 @@ import 'package:dice_game/services/authenticator_service.dart';
 import 'package:dice_game/ui/authentication.dart';
 import 'package:dice_game/ui/home_page.dart';
 import 'package:dice_game/util/constants.dart';
+import 'package:dice_game/view_models/dice_model.dart';
 import 'package:dice_game/view_models/global_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,8 @@ class DiceApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthenticatorService()),
-        ChangeNotifierProvider(create: (_) => GlobalData())
+        ChangeNotifierProvider(create: (_) => GlobalData()),
+        ChangeNotifierProvider(create: (_) =>DiceModel())
       ],
       child: MaterialApp(
         title: 'Dice game',

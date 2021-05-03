@@ -1,5 +1,4 @@
 import 'package:dice_game/services/authenticator_service.dart';
-import 'package:dice_game/services/firebase_database_service.dart';
 import 'package:dice_game/ui/authentication.dart';
 import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
@@ -40,85 +39,82 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
-          child: ChangeNotifierProvider<DiceModel>(
-            create: (_) =>DiceModel(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text("Welcome User",style: TextStyle(
-                  color: Colors.amber,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0
-                ),),
-                SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Text("Tries Remaining: ${Provider.of<GlobalData>(context,listen: true).userData.triesLeft}",style: TextStyle(
-                        color: THEME_COLOR,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Text("Your Score :  ${Provider.of<GlobalData>(context,listen: true).userData.totalScore}",style: TextStyle(
-                        color: THEME_COLOR,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Dice(key: diceKey,),
-                SizedBox(
-                  height: 25,
-                ),
-                Consumer<DiceModel>(builder: (context,data,_){
-                  return data.diceValue != 0 ? Text("You got   ${data.diceValue}",style: TextStyle(
-                    color: THEME_COLOR,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),):Container();
-                }),
-                SizedBox(
-                  height: 25,
-                ),
-                Consumer<GlobalData>(builder: (context,data,_){
-                  return data.userData.triesLeft > 0 ?
-                  Container(
-                    width: 140,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(25.0),
-                      ),),
-                      child: Text("Roll the dice",style: TextStyle(
-                          color: Colors.white
-                      ),),
-                      onPressed: (){
-                        diceKey.currentState.roll();
-                      },
-                    ),
-                  ):
-                  Text("You've completed the game",style: TextStyle(
-                    color: THEME_COLOR,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),);
-                },)
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text("Welcome User",style: TextStyle(
+                color: Colors.amber,
+                fontWeight: FontWeight.bold,
+                fontSize: 22.0
+              ),),
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Text("Tries Remaining: ${Provider.of<GlobalData>(context,listen: true).userData.triesLeft}",style: TextStyle(
+                      color: THEME_COLOR,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Text("Your Score :  ${Provider.of<GlobalData>(context,listen: true).userData.totalScore}",style: TextStyle(
+                      color: THEME_COLOR,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Dice(key: diceKey,),
+              SizedBox(
+                height: 25,
+              ),
+              Consumer<DiceModel>(builder: (context,data,_){
+                return data.diceValue != 0 ? Text("You got   ${data.diceValue}",style: TextStyle(
+                  color: THEME_COLOR,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),):Container();
+              }),
+              SizedBox(
+                height: 25,
+              ),
+              Consumer<GlobalData>(builder: (context,data,_){
+                return data.userData.triesLeft > 0 ?
+                Container(
+                  width: 140,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(25.0),
+                    ),),
+                    child: Text("Roll the dice",style: TextStyle(
+                        color: Colors.white
+                    ),),
+                    onPressed: (){
+                      diceKey.currentState.roll();
+                    },
+                  ),
+                ):
+                Text("You've completed the game",style: TextStyle(
+                  color: THEME_COLOR,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),);
+              },)
 
-              ],
-            ),
+            ],
           ),
         ),
       ),
