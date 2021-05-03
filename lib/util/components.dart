@@ -61,4 +61,18 @@ class Components{
     );
   }
 
+  static Widget getText(String text, Color color, double size,
+      {TextAlign alignment = TextAlign.start,
+        int maxLines,
+        TextDecoration underlineStyle = TextDecoration.none}) {
+    return Text(
+      text,
+      maxLines: maxLines,
+      textAlign: alignment,
+      style: TextStyle(
+          color: color,
+          fontSize: size,
+          decoration: underlineStyle),
+    );
+  }
 }

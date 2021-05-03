@@ -1,5 +1,6 @@
 import 'package:dice_game/services/authenticator_service.dart';
 import 'package:dice_game/ui/authentication.dart';
+import 'package:dice_game/ui/leaderboard.dart';
 import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
 import 'package:dice_game/util/components.dart';
@@ -146,7 +147,10 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            TextButton(onPressed: (){}, child: Text(
+            TextButton(onPressed: (){
+              Navigator.pop(context);
+              Navigator.push(context, CupertinoPageRoute(builder: (_) => LeaderBoard()));
+            }, child: Text(
               "Leaderboard",style: TextStyle(
               color: Colors.white,
               fontSize: 18
@@ -156,7 +160,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(onPressed: (){
               Navigator.pop(context);
               _onPressedLogout();
-            }, child: Text(
+             }, child: Text(
               "Logout",style: TextStyle(
                 color: Colors.white,
                 fontSize: 18

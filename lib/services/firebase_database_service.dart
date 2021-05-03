@@ -53,12 +53,15 @@ class FirebaseDBService{
      newData.triesLeft -= 1;
      newData.totalScore = newData.totalScore + diceValue;
       var resultsArray = newData.results.split(",");
-       resultsArray.remove("");
+      resultsArray.remove("");
       resultsArray.add("$diceValue");
-     newData.results = resultsArray.join(",");
-      print(newData);
+      newData.results = resultsArray.join(",");
       GlobalData.instance.updateUserData(newData: newData);
      await usersRef.child(AuthenticatorService().user.uid).update(newData.toJson());
    }
 
+   Future<Map<String,dynamic>>fetchAllUsersSortedByMaxScore() async{
+     DataSnapshot data = await usersRef.orderByChild("total_score").limitToFirst(10).once();
+     return Map<String,dynamic>.from(data.value);
+   }
 }
