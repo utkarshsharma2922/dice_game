@@ -18,23 +18,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   GlobalKey<DiceState> diceKey = GlobalKey();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        leading:  IconButton(icon: Icon(Icons.logout,color: Colors.white,), onPressed: (){
-          _onPressedLogout();
-        }),
+        title: Text("Home",style: TextStyle(
+          color: Colors.white
+        ),),
         actions: [
-          TextButton(
-            child: Text("LeaderBoard",style: TextStyle(
-              color: Colors.white
-            ),),
-            onPressed: (){
-            },
-          ),
+          IconButton(icon: Icon(Icons.menu,color: Colors.white,), onPressed: (){
+            _scaffoldKey.currentState.openEndDrawer();
+          })
         ],
+      ),
+      endDrawer: Drawer(
+        child: _getDrawer(),
       ),
       body: Center(
         child: Padding(
@@ -129,5 +130,45 @@ class _HomePageState extends State<HomePage> {
       Loader.hideLoader();
       Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => AuthenticationScreen()));
     });
+  }
+
+  Widget _getDrawer(){
+    return Container(
+
+      color: THEME_COLOR.shade600,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          TextButton(onPressed: (){}, child: Text(
+            "Leaderboard",style: TextStyle(
+            color: Colors.white,
+            fontSize: 18
+            ),
+          )),
+          Divider(),
+          TextButton(onPressed: (){
+            Navigator.pop(context);
+            _onPressedLogout();
+          }, child: Text(
+            "Logout",style: TextStyle(
+              color: Colors.white,
+              fontSize: 18
+          ),
+          )),
+          Divider(),
+          TextButton(onPressed: (){}, child: Text(
+            "Version 1.1",style: TextStyle(
+              color: Colors.white,
+              fontSize: 18
+          ),
+          )),
+          Divider(),
+
+        ],
+      ),
+    );
   }
 }
