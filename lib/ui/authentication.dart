@@ -1,6 +1,7 @@
 import 'package:dice_game/services/authenticator_service.dart';
 import 'package:dice_game/ui/home_page.dart';
 import 'package:dice_game/ui/shared_ui/loader.dart';
+import 'package:dice_game/ui/widgets/custom_textfield.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
 import 'package:dice_game/util/validator.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,65 +25,73 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           color: Colors.white
         ),)),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Dice(isMock: true,),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: TextFormField(
-                controller: _emailController,
-                validator: Validator().emailValidation,
-                decoration: InputDecoration(
-                    hintText: "Email"
-                ),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            // mainAxisSize: MainAxisSize.max,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 45,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: TextFormField(
-                obscureText: true,
-                controller: _passwordController,
-                validator: Validator().passwordValidation,
-                decoration: InputDecoration(
-                  hintText: "Password"
-                ),
+              Dice(isMock: true,),
+              SizedBox(
+                height: 25,
               ),
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    child: Text("Login",style: TextStyle(
-                      color: Colors.white
-                    ),),
-                    onPressed: (){
-                      _login();
-                    },
+              Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: CustomTextField(
+                    textEditingController: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    fieldValidator: Validator().emailValidation,
+                    icon: Icons.email,
+                    hint: "Email ",
+                  )
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: CustomTextField(
+                    textEditingController: _passwordController,
+                    keyboardType: TextInputType.text,
+                    fieldValidator: Validator().passwordValidation,
+                    obscureText: true,
+                    icon: Icons.lock,
+                    hint: "Password",
+                  )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      child: Text("Login",style: TextStyle(
+                        color: Colors.white
+                      ),),
+                      onPressed: (){
+                        _login();
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    child: Text("Signup",style: TextStyle(
-                      color: Colors.white
-                    ),),
-                    onPressed: (){
-                      _signup();
-                    },
-                  ),
-                )
-              ],
-            )
-          ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      child: Text("Signup",style: TextStyle(
+                        color: Colors.white
+                      ),),
+                      onPressed: (){
+                        _signup();
+                      },
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
+      resizeToAvoidBottomInset: true,
     );
   }
 
@@ -105,7 +114,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
 
   _handleAuthResult({AuthResult result}){
     if (result.success){
-      Navigator.push(context, CupertinoPageRoute(builder: (_) => HomePage()));
+      Navigator.pushReplacement(context, CupertinoPageRoute(builder: (_) => HomePage()));
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.error)));
     }
