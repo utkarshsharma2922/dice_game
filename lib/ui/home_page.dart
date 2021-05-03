@@ -4,6 +4,7 @@ import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
 import 'package:dice_game/util/components.dart';
 import 'package:dice_game/view_models/dice_model.dart';
+import 'package:dice_game/view_models/global_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,11 +58,11 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: Text("Tries: 10"),
+                      child: Text("Tries: ${Provider.of<GlobalData>(context,listen: true).userData.triesLeft}"),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: Text("Your Score :  80"),
+                      child: Text("Your Score :  ${Provider.of<GlobalData>(context,listen: true).userData.totalScore}"),
                     )
                   ],
                 ),

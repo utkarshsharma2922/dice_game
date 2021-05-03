@@ -17,6 +17,7 @@ class AuthenticatorService extends ChangeNotifier{
           password: password
       );
       user = userCredential.user;
+      FirebaseDBService.instance.fetchUserData();
       return AuthResult(success: true);
 
     } on FirebaseAuthException catch (e) {

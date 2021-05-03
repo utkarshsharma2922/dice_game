@@ -21,13 +21,24 @@ class FirebaseDBService{
    createUserData() async{
      var user = GameUser(
        id: AuthenticatorService().user.uid,
+       email: AuthenticatorService().user.email ,
        triesLeft: 10,
        results: "",
        totalScore: 0
      );
     await usersRef.child(AuthenticatorService().user.uid).update(user.toJson());
     GlobalData.instance.updateUserData(newData: user);
+   }
 
+   fetchUserData() async{
+     await usersRef.child(AuthenticatorService().user.uid).once().then((DataSnapshot data){
+       if (data.value != null){
+         Map<String,dynamic> userMap = data.value;
+         GameUser user = GameUser.fromJson(userMap);
+         GlobalData.instance.updateUserData(newData: user);
+         print(data);
+       }
+     });
    }
 
 }
