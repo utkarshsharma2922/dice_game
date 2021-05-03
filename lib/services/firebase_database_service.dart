@@ -33,12 +33,32 @@ class FirebaseDBService{
    fetchUserData() async{
      await usersRef.child(AuthenticatorService().user.uid).once().then((DataSnapshot data){
        if (data.value != null){
-         Map<String,dynamic> userMap = data.value;
+         Map<String,dynamic> userMap = Map<String, dynamic>.from(data.value);
          GameUser user = GameUser.fromJson(userMap);
          GlobalData.instance.updateUserData(newData: user);
          print(data);
        }
      });
+   }
+   
+   updateUserScore({int diceValue})async{
+     var userData = GlobalData().userData;
+     GameUser newData = GameUser(
+       id:  userData.id,
+       email: userData.email,
+       triesLeft: userData.triesLeft,
+       results: userData.results,
+       totalScore: userData.totalScore
+     );
+     newData.triesLeft -= 1;
+     newData.totalScore = newData.totalScore + diceValue;
+      var resultsArray = newData.results.split(",");
+       resultsArray.remove("");
+      resultsArray.add("$diceValue");
+     newData.results = resultsArray.join(",");
+      print(newData);
+      GlobalData.instance.updateUserData(newData: newData);
+     await usersRef.child(AuthenticatorService().user.uid).update(newData.toJson());
    }
 
 }

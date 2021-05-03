@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dice_game/services/firebase_database_service.dart';
+import 'package:dice_game/view_models/global_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 

@@ -1,4 +1,5 @@
 import 'package:dice_game/services/authenticator_service.dart';
+import 'package:dice_game/services/firebase_database_service.dart';
 import 'package:dice_game/ui/authentication.dart';
 import 'package:dice_game/ui/home_page.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
@@ -32,9 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  _checkNavigation(){
+  _checkNavigation() async{
     var user = Provider.of<AuthenticatorService>(context,listen: false).user;
     if (user != null){
+      await FirebaseDBService.instance.fetchUserData();
       Navigator.pushReplacement(context, CupertinoPageRoute(builder: (_) => HomePage()));
     }else{
       Navigator.pushReplacement(context, CupertinoPageRoute(builder: (_) => AuthenticationScreen()));

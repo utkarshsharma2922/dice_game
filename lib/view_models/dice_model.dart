@@ -1,3 +1,4 @@
+import 'package:dice_game/services/firebase_database_service.dart';
 import 'package:flutter/material.dart';
 
 class DiceModel extends ChangeNotifier {
@@ -13,6 +14,7 @@ class DiceModel extends ChangeNotifier {
 
   updateDiceValue({int value}){
     _value = value;
+    FirebaseDBService.instance.updateUserScore(diceValue:diceValue);
     notifyListeners();
   }
 }
