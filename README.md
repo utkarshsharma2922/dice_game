@@ -1,17 +1,11 @@
-# dice_game
+# Dice game
 
-A new Flutter application.
+A dice game which allows user to have 10 retries.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+# Architecture used
+ -[Provider] (https://pub.dev/packages/provider)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# dice_game
+ # Database used
+ -[Firebase Realtime Database ](https://pub.dev/packages/firebase_database)
