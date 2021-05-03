@@ -90,7 +90,7 @@ class DiceState extends State<Dice> {
       }else{
         if (this.mounted){
           setState(() {
-            _diceNumber = Random().nextInt(5);
+            _diceNumber = Random().nextInt(6);
             _currentRollCount ++;
           });
         }

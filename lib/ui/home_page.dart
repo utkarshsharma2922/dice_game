@@ -34,8 +34,11 @@ class _HomePageState extends State<HomePage> {
           })
         ],
       ),
-      endDrawer: Drawer(
-        child: _getDrawer(),
+      endDrawer: Container(
+        width: MediaQuery.of(context).size.width*0.65,
+        child: Drawer(
+          child: _getDrawer(),
+        ),
       ),
       body: Center(
         child: Padding(
@@ -134,40 +137,42 @@ class _HomePageState extends State<HomePage> {
 
   Widget _getDrawer(){
     return Container(
+      color: THEME_COLOR,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
 
-      color: THEME_COLOR.shade600,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-
-          TextButton(onPressed: (){}, child: Text(
-            "Leaderboard",style: TextStyle(
-            color: Colors.white,
-            fontSize: 18
+            TextButton(onPressed: (){}, child: Text(
+              "Leaderboard",style: TextStyle(
+              color: Colors.white,
+              fontSize: 18
+              ),
+            )),
+            Divider(),
+            TextButton(onPressed: (){
+              Navigator.pop(context);
+              _onPressedLogout();
+            }, child: Text(
+              "Logout",style: TextStyle(
+                color: Colors.white,
+                fontSize: 18
             ),
-          )),
-          Divider(),
-          TextButton(onPressed: (){
-            Navigator.pop(context);
-            _onPressedLogout();
-          }, child: Text(
-            "Logout",style: TextStyle(
-              color: Colors.white,
-              fontSize: 18
-          ),
-          )),
-          Divider(),
-          TextButton(onPressed: (){}, child: Text(
-            "Version 1.1",style: TextStyle(
-              color: Colors.white,
-              fontSize: 18
-          ),
-          )),
-          Divider(),
+            )),
+            Divider(),
+            TextButton(onPressed: (){}, child: Text(
+              "Version 1.1",style: TextStyle(
+                color: Colors.white,
+                fontSize: 18
+            ),
+            )),
+            Divider(),
 
-        ],
+          ],
+        ),
       ),
     );
   }
