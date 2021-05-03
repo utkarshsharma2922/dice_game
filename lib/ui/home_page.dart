@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _onPressedLogout(){
-    Components.showMessage("Are you sure you want to logout ?", context, "Logout", () async {
+    Components.showMessage(msg:"Are you sure you want to logout ?", passedContext:context, okBtnText:"Logout",okBtnPressed: () async {
       Loader.showLoader(context);
       await FirebaseAuth.instance.signOut();
       Provider.of<AuthenticatorService>(context,listen: false).user = null;

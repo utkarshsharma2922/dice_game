@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dice_game/services/firebase_database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -40,6 +41,7 @@ class AuthenticatorService extends ChangeNotifier{
           password: password
       );
       user = userCredential.user;
+      FirebaseDBService.instance.createUserData();
       return AuthResult(success: true);
     } on FirebaseAuthException catch (e) {
       String error;

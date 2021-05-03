@@ -3,6 +3,7 @@ import 'package:dice_game/ui/home_page.dart';
 import 'package:dice_game/ui/shared_ui/loader.dart';
 import 'package:dice_game/ui/widgets/custom_textfield.dart';
 import 'package:dice_game/ui/widgets/dice.dart';
+import 'package:dice_game/util/components.dart';
 import 'package:dice_game/util/validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -116,7 +117,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     if (result.success){
       Navigator.pushReplacement(context, CupertinoPageRoute(builder: (_) => HomePage()));
     }else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.error)));
+      Components.showErrorMessage(msg: result.error,passedContext: context,);
     }
   }
 }
