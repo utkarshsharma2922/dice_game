@@ -18,7 +18,7 @@ class AuthenticatorService extends ChangeNotifier{
           password: password
       );
       user = userCredential.user;
-      FirebaseDBService.instance.fetchUserData();
+      await FirebaseDBService.instance.fetchUserData();
       return AuthResult(success: true);
 
     } on FirebaseAuthException catch (e) {
@@ -43,7 +43,7 @@ class AuthenticatorService extends ChangeNotifier{
           password: password
       );
       user = userCredential.user;
-      FirebaseDBService.instance.createUserData();
+      await FirebaseDBService.instance.createUserData();
       return AuthResult(success: true);
     } on FirebaseAuthException catch (e) {
       String error;

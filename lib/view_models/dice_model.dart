@@ -17,4 +17,7 @@ class DiceModel extends ChangeNotifier {
     FirebaseDBService.instance.updateUserScore(diceValue:diceValue);
     notifyListeners();
   }
+  reset(){
+    _value = 0;
+  }
 }

@@ -18,7 +18,7 @@ class FirebaseDBService{
   final databaseRef = FirebaseDatabase.instance.reference();//database reference object
   final usersRef = FirebaseDatabase.instance.reference().child("users");
 
-   createUserData() async{
+   Future<bool>createUserData() async{
      var user = GameUser(
        id: AuthenticatorService().user.uid,
        email: AuthenticatorService().user.email ,
@@ -28,17 +28,18 @@ class FirebaseDBService{
      );
     await usersRef.child(AuthenticatorService().user.uid).update(user.toJson());
     GlobalData.instance.updateUserData(newData: user);
+    return true;
    }
 
-   fetchUserData() async{
-     await usersRef.child(AuthenticatorService().user.uid).once().then((DataSnapshot data){
-       if (data.value != null){
-         Map<String,dynamic> userMap = Map<String, dynamic>.from(data.value);
-         GameUser user = GameUser.fromJson(userMap);
-         GlobalData.instance.updateUserData(newData: user);
-         print(data);
-       }
-     });
+   Future<bool>fetchUserData() async{
+     DataSnapshot data = await usersRef.child(AuthenticatorService().user.uid).once();
+     if (data.value != null){
+       Map<String,dynamic> userMap = Map<String, dynamic>.from(data.value);
+       GameUser user = GameUser.fromJson(userMap);
+       GlobalData.instance.updateUserData(newData: user);
+       print(data);
+     }
+     return true;
    }
    
    updateUserScore({int diceValue})async{

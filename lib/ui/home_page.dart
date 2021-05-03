@@ -54,6 +54,13 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.bold,
                 fontSize: 22.0
               ),),
+              SizedBox(height: 10,),
+              Text(GlobalData.instance.userData.email,style: TextStyle(
+                  color: Colors.amber,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18.0
+              ),),
+
               SizedBox(
                 height: 30,
               ),
@@ -131,6 +138,7 @@ class _HomePageState extends State<HomePage> {
       Loader.showLoader(context);
       await FirebaseAuth.instance.signOut();
       Provider.of<AuthenticatorService>(context,listen: false).user = null;
+      Provider.of<DiceModel>(context,listen: false).reset();
       Loader.hideLoader();
       Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (_) => AuthenticationScreen()));
     });
